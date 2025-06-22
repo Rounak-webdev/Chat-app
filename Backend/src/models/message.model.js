@@ -13,7 +13,7 @@ const messageSchema = new mongoose.Schema(
             required: true,
         },
         text :{
-            type:String,
+            type : String,
         },
         image:{
             type: String,
@@ -25,4 +25,4 @@ const messageSchema = new mongoose.Schema(
 
 const Message =  mongoose.model("Message",messageSchema);
 
-export default User;
+export default Message;
