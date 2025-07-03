@@ -9,7 +9,7 @@ export const protectRoute = async(req,res,next)=> {
             return res.status(401).json({ message:"Unauthorized - No  Token is provided"});
         }
 
-        const decoded = jwt.verify(token , process.env.JWT_SECRET)
+        const decoded = jwt.verify(token , process.env.JWT_SECRET);
 
         if(!decoded){
             return res.status(401).json({message: "Unauthorized - Invalid Token"});
@@ -30,4 +30,4 @@ export const protectRoute = async(req,res,next)=> {
         res.status(500).json({message:"Internal Server error"});
 
     }
-}
+};

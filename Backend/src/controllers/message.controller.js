@@ -1,11 +1,13 @@
 import  User from "../models/user.model.js";
 import Message from "../models/message.model.js";
 
+import cloudinary from "../lib/cloudinary.js";
 
-export const getUsersForSidebar = async(requestAnimationFrame,res) => {
+
+export const getUsersForSidebar = async(req,res) => {
     try{
-        const loggedInUserId = requestAnimationFrame.user._id;
-        const filterredUsers = await User.find({_id: {$ne:loggedInUserId}}).select("-password");
+        const loggedInUserId = req.user._id;
+        const filteredUsers = await User.find({_id: {$ne:loggedInUserId}}).select("-password");
         res.status(200).json(filteredUsers);
     }catch(error){
         console.error("Error in getUsersForSidebar: ", error.message);
@@ -16,7 +18,7 @@ export const getUsersForSidebar = async(requestAnimationFrame,res) => {
 
 export const getMessages = async(req,res) => {
     try{
-       const {id:userToChatId } = req.params
+       const {id: userToChatId } = req.params
        const myId = req.user._id;
 
        const messages = await Message.find({
@@ -29,7 +31,7 @@ export const getMessages = async(req,res) => {
        res.status(200).json(messages);
 
     }catch(error){
-        console.log("error getMesage controller:", erroor.message);
+        console.log("Error in  getMesage controller:", error.message);
         res.status(500).json({error:"Internal server error" });
     }
 }
@@ -54,7 +56,7 @@ export const sendMessage = async (req,res) => {
             receiverId,
             text,
             image: imageUrl,
-        })
+        });
 
         await newMessage.save();
 
