@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare  } from "lucide-react";
 
 const LoginPage = () => {
-  const {showPassword, setShowPassword} = useState(false);
-  const {formData , setFormData } = useState({
-    email : " ",
-    password: " ",
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData , setFormData ] = useState({
+    email: "",
+    password: "",
   });
   const { login , isLoggingIn } = useAuthStore();
 
@@ -46,7 +46,7 @@ const LoginPage = () => {
                 </div>
                 <input
                   type="email"
-                  className={`input input-bordered w-full pl-10`}
+                  className="input input-bordered w-full pl-10 "
                   placeholder="you@example.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -83,8 +83,8 @@ const LoginPage = () => {
               </div>
             </div>
 
-            <button type="submit" className="btn btn-primary w-full" disabled={isSigningUp}>
-              {isSigningUp ? (
+            <button type="submit" className="btn btn-primary w-full" disabled={isLoggingIn}>
+              {isLoggingIn ? (
                 <>
                   <Loader2 className="size-5 animate-spin" />
                   Loading...
@@ -114,6 +114,6 @@ const LoginPage = () => {
       />
     </div> 
   );
-}
+};
 
 export default LoginPage ;
